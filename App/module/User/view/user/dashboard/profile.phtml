@@ -1,0 +1,31 @@
+<?php $this->headTitle("Profile") ?>
+<?php $user = $this->user; ?>
+<br>
+<br>
+<div class="box box-primary col-lg-5 col-md-5">
+<div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="/uploads/images/user/<?=$user->getImage()?>" style="height:100px;width:100px" alt="User profile picture">
+
+              <h3 class="profile-username text-center"><?= $user->getName(); ?></h3>
+
+              <p class="text-muted text-center">Software Engineer</p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item pr-5">
+                  <b>Address</b> <a class="pull-right"><?=$user->getAddress()?></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Email</b> <a class="pull-right"><?=$user->getEmail()?></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Mobile</b> <a class="pull-right"><?=$user->getMobile()?></a>
+                </li>
+                 <li class="list-group-item">
+                  <b>Last Password Changed</b> <a class="pull-right"><?=$user->lastPasswordChangedDuration()?></a>
+                </li>
+              </ul>
+
+              <a href="<?=$this->url('dashboard/profile/edit')?>" class="btn btn-primary btn-block"><b>
+                <i class="fa fa-edit"></i> Edit Profile</b></a>
+            </div>
+        </div>

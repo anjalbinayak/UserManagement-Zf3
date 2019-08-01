@@ -1,0 +1,32 @@
+<?php $this->headTitle("Signup") ?>
+<?= $this->partial('layout/header') ?>
+<?php
+$signupForm = $this->signupForm;
+?>
+<div class="container-fluid"  style='width:50%'>
+	<h3 class='text-success text-center'> Signup Form </h3>
+             <?php if($this->flashMessenger()->hasErrorMessages())
+                     {
+                      $messages = $this->flashMessenger()->getErrorMessages();
+                      foreach($messages as $message)
+                      {
+                        ?>
+
+          <div class="alert alert-danger alert-dismissible" id="#alert">
+         
+           <?= $message ?>
+        </div>
+
+      <?php }
+
+     }
+     ?>
+        
+
+<?= $this->form($signupForm) ?>
+</div>
+<style type="text/css">
+  .btn-success{
+    margin-top: 15px;
+  }
+</style>

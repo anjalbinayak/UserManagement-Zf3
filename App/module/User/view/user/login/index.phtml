@@ -1,0 +1,24 @@
+<?php $this->headTitle("Login"); ?>
+<?= $this->partial('layout/header'); ?>
+<?php $messages = $this->flashMessenger()->getErrorMessages(); ?>
+<?php 
+$loginForm = $this->loginForm;
+$messages = $this->flashMessenger()->getMessages();
+?>
+<div class="container-fluid"  style='width:50%'>
+
+	<h3 class='text-success text-center'> Login Form </h3>
+		<p class='text text-danger'> <?php foreach($messages as $message)
+		{
+			echo $message;
+		}
+		?>
+	</p>
+<?= $this->form($loginForm) ?>
+</div>
+<style>
+.btn-primary{
+	margin-top:15px;
+}
+</style>
+

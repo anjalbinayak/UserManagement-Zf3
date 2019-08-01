@@ -1,0 +1,123 @@
+<?php $this->headTitle('All Users') ?>
+<?php
+$allUsers = $this->allUsers;
+?>
+
+<div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Filter User</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-wrench"></i></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <form method="GET">
+                 <div class="row">
+              	
+              		<div class="form-group col-lg-3 col-md-3">
+              			<input type="text" name="name" class="form-control" placeholder="Name">
+              		</div>
+
+              		<div class="form-group col-lg-3 col-md-3">
+              			<input type="text" name="email" class="form-control" placeholder="Email">
+              		</div>
+
+              		<div class="form-group col-lg-3 col-md-3">
+              			<input type="text" name="address" class="form-control" placeholder="Address">
+              		</div>
+
+              		<div class="form-group col-lg-3 col-md-4">
+              			<input type="text" name="mobile" class="form-control" placeholder="Mobile No.">
+              		</div>
+
+              		<div class="form-group col-lg-3 col-md-3">
+              			<label for="user_type">User Type </label>
+              			<select name="user_type" class="form-control">
+                      <option value=''>none </option>
+              				<option value="ADMIN"> Admin </option>
+              				<option value="USER"> User </option>
+              			</select>
+              		</div>
+
+              		<div class="form-group col-lg-3 col-md-3">
+              			<label for="user_status">User Status </label>
+              			<select name="user_status" class="form-control">
+                      <option value=''>none </option>
+              				<option value="ENABLED"> Enabled </option>
+              				<option value="DISABLED"> Disabled </option>
+              			</select>
+              		</div>
+
+                   </div>
+
+                   <button class="btn btn-primary" type="submit">
+                   	<span class="fa fa-filter"></span> Filter
+                   </button>
+
+              	</form>
+                <!-- /.col -->
+              
+              <!-- /.row -->
+            </div>
+            <!-- ./box-body -->
+           
+          </div>
+          <!-- /.box -->
+        </div>
+
+<table class='table table-hover'>
+	<th> Image </th>
+	<th> Name </th>
+	<th> Email </th>
+	<th> Address </th>
+	<th> Mobile </th>
+	<th> User type </th>
+  <th> Status </th>
+	<th> Action </th>
+
+	<?php foreach($allUsers as $user){
+    $status = $user->getUserStatus() == $user::USER_ENABLED ? '<p class="label label-success">Active</p>' : '<p class="label label-danger">Inactive</p>';
+		$id = $user->getUserId();
+		$name = $user->getName();
+		$image = $user->getImage();
+		$email = $user->getEmail();
+		$address = $user->getAddress();
+		$mobile = $user->getMobile();
+		$userType = ucfirst(strtolower($user->getUserType()));
+		$userStatus = $user->getUserStatus();
+		if($userStatus == $user::USER_ENABLED)
+			$icon = '<a class="btn btn-danger" data-toggle="tooltip" data-title="Disable User"  href="/user/disable/'.$id.'"><i class="fa fa-thumbs-down" ></i> </a>';
+		else
+			$icon = '<a class="btn btn-success" data-toggle="tooltip" data-title="Enable User"   href="/user/enable/'.$id.'"><i class="fa fa-thumbs-up" ></i></a>';
+		
+		
+	 ?>
+<tr><td> <img src='/uploads/images/user/<?=$image?>' style="height:50px;width:50px"> </td>
+	<td> <?= $name ?> </td>
+	<td> <?= $email ?> </td>
+	<td> <?= $address ?> </td>
+	<td> <?= $mobile ?>  </td>
+	<td> <?= $userType ?> </td>
+  <td> <?= $status ?> </td>
+	
+	<td> <?= $icon ?> <a class='btn btn-primary' data-toggle="tooltip" data-title="Edit User" href='/user/edit/<?=$id?>'> <i class='fa fa-edit'> Edit </i></a> </td>
+ </tr>
+<?php } ?>
+
+</table>
